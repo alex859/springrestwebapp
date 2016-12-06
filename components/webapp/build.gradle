@@ -1,0 +1,43 @@
+buildscript {
+
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+	}
+}
+
+apply plugin: 'org.springframework.boot'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    compile project(":components:restservice")
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('org.springframework.boot:spring-boot-devtools')
+}
+
+task javascriptDependencies(type: Exec) {
+    commandLine 'npm',  'install'
+}
+
+task npmBuild(type: Exec, dependsOn: 'javascriptDependencies') {
+	commandLine 'npm', 'run', 'buildDev'
+}
+
+task npmWatch(type: Exec) {
+	commandLine 'npm', 'run', 'watch'
+}
+
+tasks.build.dependsOn npmBuild
+
+/*To be able to pass JVM parameters to gradle (e.g. Spring profiles)*/
+bootRun {
+	systemProperties System.properties
+}
+
+
+

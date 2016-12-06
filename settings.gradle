@@ -1,0 +1,7 @@
+include 'components:common'
+include 'components:service'
+include 'components:restservice'
+include 'components:webapp'
+
+rootProject.name = 'components:webapp'
+
