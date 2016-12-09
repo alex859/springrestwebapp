@@ -25,4 +25,4 @@ nbdist/
 .nb-gradle/
 
 ### JS dependencies
-components/webapp/node_modules
+components/frontend/node_modules

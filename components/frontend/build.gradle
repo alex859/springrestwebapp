@@ -1,0 +1,26 @@
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+}
+
+task javascriptDependencies(type: Exec) {
+    commandLine 'npm',  'install'
+}
+
+task npmBuild(type: Exec, dependsOn: 'javascriptDependencies') {
+	commandLine 'npm', 'run', 'buildDev'
+}
+
+task npmWatch(type: Exec) {
+	commandLine 'npm', 'run', 'watch'
+}
+
+tasks.build.dependsOn npmBuild
+
+
+
+
+
